@@ -44,7 +44,12 @@ const TextUpload = (props) => {
         title: textTitle,
       };
       axios
-        .post("api/oracle_backend.php?appendtext", postContent)
+        .post(
+          (import.meta.env.MODE === "development"
+            ? "/api/"
+            : import.meta.env.VITE_API_URL) + "/oracle_backend.php?appendtext",
+          postContent
+        )
         .then((res) => {
           console.log(res.data);
           setUploadResponse(res.data);
@@ -69,9 +74,8 @@ const TextUpload = (props) => {
 
   return (
     <div className="bg-zinc-600 px-4 py-4 text-white">
-      <h3 className="text-4xl mb-5">Sube un texto</h3>
+      <h3 className="text-4xl mb-5 font-display">Sube un texto</h3>
       <form className="kd_upload_form form">
-      
         <input
           className="py-2 px-2 mb-2"
           type="text"
@@ -100,8 +104,14 @@ const TextUpload = (props) => {
             Cada línea será desagregada y utilizada como una posible respuesta a
             tu pregunta
           </p>
-          <p>Los textos poéticos van muy bien para generar un oráculo. También cualquier texto evocativo podría servir.</p>
-          <p>Ten en cuenta que cada texto subido se agregará a un indice de disponibilidad de textos</p>
+          <p>
+            Los textos poéticos van muy bien para generar un oráculo. También
+            cualquier texto evocativo podría servir.
+          </p>
+          <p>
+            Ten en cuenta que cada texto subido se agregará a un indice de
+            disponibilidad de textos
+          </p>
         </label>
       </form>
       <div className="results">

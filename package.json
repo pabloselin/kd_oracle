@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "homepage": "https://kdi.pablosel.in/calculadora/",
+  "homepage": "https://kdi.pablosel.in/oracle/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

@@ -6,7 +6,7 @@ import OracleQuestion from "./components/OracleQuestion";
 function OracleWrapper() {
   const [oracleActive, setOracleActive] = useState(false);
   const [textId, setTextId] = useState(null);
-
+  console.log(import.meta.env.MODE);
   const onSelectTextId = (id) => {
     setTextId(id);
   };

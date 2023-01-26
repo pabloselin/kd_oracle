@@ -6,9 +6,15 @@ function ListTexts({ activeText, onSelectTextId }) {
 
   useEffect(() => {
     if (!texts) {
-      axios.get("api/oracle_backend.php?listtexts").then((res) => {
-        setTexts(res.data);
-      });
+      axios
+        .get(
+          (import.meta.env.MODE === "development"
+            ? "/api/"
+            : import.meta.env.VITE_API_URL) + "oracle_backend.php?listtexts"
+        )
+        .then((res) => {
+          setTexts(res.data);
+        });
     }
   }, [texts]);
 
@@ -22,7 +28,9 @@ function ListTexts({ activeText, onSelectTextId }) {
         {texts &&
           texts.map((text) => (
             <li
-              className={"px-2 py-2 border border-gray-900 font-bold mb-4 cursor-pointer hover:bg-white"}
+              className={
+                "px-2 py-2 border border-gray-900 font-bold mb-4 cursor-pointer hover:bg-white"
+              }
               onClick={() => onSelectTextId(text.id)}
               key={text.id}
             >
