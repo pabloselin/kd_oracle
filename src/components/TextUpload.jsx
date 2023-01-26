@@ -68,9 +68,12 @@ const TextUpload = (props) => {
   };
 
   return (
-    <div>
+    <div className="bg-zinc-600 px-4 py-4 text-white">
+      <h3 className="text-4xl mb-5">Sube un texto</h3>
       <form className="kd_upload_form form">
+      
         <input
+          className="py-2 px-2 mb-2"
           type="text"
           name="oracletitle"
           placeholder="Título"
@@ -84,6 +87,7 @@ const TextUpload = (props) => {
           accept=".txt"
         />
         <button
+          className="py-2 px-2 mb-2 border border-black bg-white text-black mt-2"
           type="submit"
           disabled={submitted ? "disabled" : false}
           onClick={(e) => handleSubmit(e)}

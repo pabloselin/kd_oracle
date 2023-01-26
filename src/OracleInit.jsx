@@ -6,20 +6,18 @@ import ListTexts from "./components/ListTexts";
 
 function OracleInit({ textId, activateOracle, onSelectTextId }) {
   return (
-    <div>
-      <h2>Textos disponibles</h2>
-      <p>
-        Escoge un texto para utilizar de referencia para generar la respuesta.
-      </p>
+    <div className="container flex gap-5">
+      <div>
       <ListTexts activeText={textId} onSelectTextId={onSelectTextId} />
       {textId && (
         <div>
-          <button onClick={() => activateOracle()}>Comenzar</button>
+          <button className="block px-2 py-2 border border-black my-4 cursor-pointer" onClick={() => activateOracle()}>Comenzar</button>
         </div>
       )}
-      <h3>Sube tu propio texto</h3>
+      </div>
+      
       <TextUpload />
-     
+        
     </div>
   );
 }
