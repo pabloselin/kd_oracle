@@ -47,7 +47,7 @@ const TextUpload = (props) => {
         .post(
           (import.meta.env.MODE === "development"
             ? "/api/"
-            : import.meta.env.VITE_API_URL) + "/oracle_backend.php?appendtext",
+            : import.meta.env.VITE_API_URL) + "oracle_backend.php?appendtext",
           postContent
         )
         .then((res) => {
@@ -72,12 +72,18 @@ const TextUpload = (props) => {
     setTextTitle(e.target.value);
   };
 
+  useEffect(() => {
+    if(uploadResponse) {
+      props.passUploadResponse(uploadResponse);
+    }
+  }, [uploadResponse]);
+
   return (
     <div className="bg-zinc-600 px-4 py-4 text-white">
       <h3 className="text-4xl mb-5 font-display">Sube un texto</h3>
       <form className="kd_upload_form form">
         <input
-          className="py-2 px-2 mb-2"
+          className="py-2 px-2 mb-2 text-black"
           type="text"
           name="oracletitle"
           placeholder="Título"

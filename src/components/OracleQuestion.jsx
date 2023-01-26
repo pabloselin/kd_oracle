@@ -16,9 +16,16 @@ function OracleQuestion({ textId }) {
 
   useEffect(() => {
     if (!data) {
-      axios.get(`api/oracle_backend.php?gettext&id=${textId}`).then((res) => {
-        setData(res.data);
-      });
+      axios
+        .get(
+          (import.meta.env.MODE === "development"
+            ? "/api/"
+            : import.meta.env.VITE_API_URL) +
+            `oracle_backend.php?gettext&id=${textId}`
+        )
+        .then((res) => {
+          setData(res.data);
+        });
     }
   }, [data]);
 
@@ -52,13 +59,16 @@ function OracleQuestion({ textId }) {
       <Stage width={600} height={200} className="mx-auto">
         <Layer>
           {step > 0 &&
-            archivedPoints.map((points, index) => {console.log(index); return (
-              <OracleStaticFigure
-                x={index * 200 - 200}
-                points={points}
-                color={"hsl(10, 100%, 100%"}
-              />
-            )})}
+            archivedPoints.map((points, index) => {
+              console.log(index);
+              return (
+                <OracleStaticFigure
+                  x={index * 200 - 200}
+                  points={points}
+                  color={"hsl(10, 100%, 100%"}
+                />
+              );
+            })}
           <OracleFigure
             handleStage={(stage) => handleStage(stage)}
             handleGetPoints={(points) => handleGetPoints(points)}
@@ -66,10 +76,10 @@ function OracleQuestion({ textId }) {
         </Layer>
       </Stage>
       <div className="text-center text-3xl mt-10">
-      {sentences &&
-        step === 3 &&
-        sentences.map((sentence, idx) => <p key={idx}>{sentence}</p>)}
-        </div>
+        {sentences &&
+          step === 3 &&
+          sentences.map((sentence, idx) => <p key={idx}>{sentence}</p>)}
+      </div>
     </div>
   );
 }
