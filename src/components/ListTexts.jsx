@@ -30,18 +30,21 @@ function ListTexts({ activeText, onSelectTextId, newUpload }) {
 
   return (
     <div className="bg-slate-300 px-4 py-4 border border-red-400 text-black">
-      <h2 className="text-2xl mb-4">Textos disponibles</h2>
+      <h2 className="text-2xl mb-4 font-display">Textos disponibles</h2>
       <p>
-        Escoge un texto para utilizar de referencia para generar la respuesta.
+        Puedes usar cualquiera de los textos de más abajo para usar de base a tu pregunta.
       </p>
-      <ul className="list-texts py-4">
+      <p>
+        También puedes subir un texto propio en la sección de "Subir texto"
+      </p>
+      <ul className="list-texts py-4 h-80 overflow-y-scroll">
         {texts &&
           texts.map((text) => (
             <li
               className={`${
-                text.id === activeText ? "bg-white" : "bg-gray"
-              } px-2 py-2 border border-gray-900 font-bold mb-4 cursor-pointer hover:bg-white`}
-              onClick={() => onSelectTextId(text.id)}
+                text.id === activeText ? "bg-green-300 font-bold" : "bg-gray font-normal"
+              } px-2 py-2 border border-gray-600 mb-4 cursor-pointer hover:bg-white`}
+              onClick={() => onSelectTextId(text.id, text.title)}
               key={text.id}
             >
               {text.title}

@@ -56,6 +56,7 @@ function OracleQuestion({ textId }) {
 
   return (
     <div className="container flex align-middle justify-center flex-col h-screen w-full">
+      <p className="italic text-center mb-12">Haz clic sobre la forma cambiante tres veces.</p>
       <Stage width={600} height={200} className="mx-auto">
         <Layer>
           {step > 0 &&

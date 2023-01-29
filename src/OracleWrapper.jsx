@@ -6,10 +6,11 @@ import OracleQuestion from "./components/OracleQuestion";
 function OracleWrapper() {
   const [oracleActive, setOracleActive] = useState(false);
   const [textId, setTextId] = useState(null);
-  console.log(import.meta.env.MODE);
+  const [textTitle, setTextTitle] = useState(null);
   
-  const onSelectTextId = (id) => {
+  const onSelectTextId = (id, title) => {
     setTextId(id);
+    setTextTitle(title);
   };
 
   const activateOracle = () => {
@@ -19,13 +20,13 @@ function OracleWrapper() {
   return (
     <main className="container mx-auto px-4 mt-10">
       <header className="px-4">
-        <h1 className="text-6xl mb-5 font-display text-center">Oráculo autogenerado</h1>
+        <h1 className="text-6xl mb-5 font-display text-center">Toracle</h1>
       </header>
       
       {oracleActive ? (
         <OracleQuestion textId={textId}/>
       ) : (
-        <OracleInit textId={textId} activateOracle={activateOracle} onSelectTextId={onSelectTextId}/>
+        <OracleInit textTitle={textTitle} textId={textId} activateOracle={activateOracle} onSelectTextId={onSelectTextId}/>
       )}
       
     </main>

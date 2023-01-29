@@ -11,12 +11,22 @@ const TextUpload = (props) => {
   const [uploadResponse, setUploadResponse] = useState(null);
 
   const parseText = (text) => {
+    const linesArr = [];
     let lines = text.split("\r");
     // remove empty lines
     lines = lines.filter((line) => line !== "");
     // remove \n
     lines = lines.map((line) => line.replace("\n", ""));
-    return lines;
+    //separate lines by periods
+    lines.forEach((line) => {
+      const lineSplit = line.split(".");
+      lineSplit.forEach((line) => {
+        if (line !== "") {
+          linesArr.push(line);
+        }
+      });
+    });
+    return linesArr;
   };
 
   useEffect(() => {
@@ -37,7 +47,7 @@ const TextUpload = (props) => {
   }, [submitted, file]);
 
   useEffect(() => {
-    if (parsedText.length > 0) {
+    if (parsedText.length > 0 && textTitle !== "") {
       //axios post request
       const postContent = {
         text: parsedText,
@@ -73,7 +83,7 @@ const TextUpload = (props) => {
   };
 
   useEffect(() => {
-    if(uploadResponse) {
+    if (uploadResponse) {
       props.passUploadResponse(uploadResponse);
     }
   }, [uploadResponse]);
@@ -83,46 +93,50 @@ const TextUpload = (props) => {
       <h3 className="text-4xl mb-5 font-display">Sube un texto</h3>
       <form className="kd_upload_form form">
         <input
-          className="py-2 px-2 mb-2 text-black"
+          className="py-2 px-2 mb-2 text-black block w-full text-3xl"
           type="text"
           name="oracletitle"
-          placeholder="Título"
+          placeholder="Título del texto"
           required
           onChange={(e) => handleTitleChange(e)}
         />
-        <input
-          type="file"
-          name="oracletext"
+        <label
           onChange={(e) => handleChange(e)}
-          accept=".txt"
-        />
+          className="text-2xl inline-block cursor-pointer"
+          htmlFor="oracletext"
+        >
+          <span className="block bg-white border border-black my-1 text-black p-2">{file ? <>{file.name}</> : <>Clic aquí para seleccionar archivo ...</>}</span>
+          <input
+            type="file"
+            id="oracletext"
+            name="oracletext"
+            accept=".txt"
+            className="hidden"
+          />
+        </label>
         <button
-          className="py-2 px-2 mb-2 border border-black bg-white text-black mt-2"
+          className="py-2 px-2 mb-2 border border-black bg-white text-black mt-2 block"
           type="submit"
           disabled={submitted ? "disabled" : false}
           onClick={(e) => handleSubmit(e)}
         >
-          Enviar
+          Subir archivo
         </button>
-        <label>
-          <p>Puedes subir un texto en formato .txt.</p>
-          <p>
-            Cada línea será desagregada y utilizada como una posible respuesta a
-            tu pregunta
-          </p>
-          <p>
-            Los textos poéticos van muy bien para generar un oráculo. También
-            cualquier texto evocativo podría servir.
-          </p>
-          <p>
-            Ten en cuenta que cada texto subido se agregará a un indice de
-            disponibilidad de textos
-          </p>
+        <div className="results p-4 bg-lime-200 text-black text-center mt-3">
+          {uploadResponse && <p className="text-2xl">Archivo de texto subido.</p>}
+        </div>
+        <label className="mt-10 block">
+          <h1 className="font-display text-2xl">Instrucciones</h1>
+          <ol className="pl-5 mt-5">
+            <li>1. Pon un título a tu texto</li>
+            <li>2. Sube un archivo de texto con la extensión .txt</li>
+            <li>3. El sistema procesará tu texto para poder usarlo como un oráculo.</li>
+            <li>4. Tu texto quedará disponible para que otras personas puedan consultarlo. (nunca se leerá completo, solo se proporcionan fragmentos de tu texto)</li>
+          </ol>
+          
         </label>
       </form>
-      <div className="results">
-        {uploadResponse && <p>Archivo de texto subido.</p>}
-      </div>
+     
     </div>
   );
 };
