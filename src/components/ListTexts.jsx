@@ -29,7 +29,7 @@ function ListTexts({ activeText, onSelectTextId, newUpload }) {
   });
 
   return (
-    <div className="bg-slate-300 px-4 py-4 border border-red-400 text-black">
+    <div className="bg-slate-300 px-4 py-4 border border-red-400 text-black w-3/4">
       <h2 className="text-2xl mb-4 font-display">Textos disponibles</h2>
       <p>
         Puedes usar cualquiera de los textos de más abajo para usar de base a tu pregunta.

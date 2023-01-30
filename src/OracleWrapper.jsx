@@ -20,7 +20,7 @@ function OracleWrapper() {
   return (
     <main className="container mx-auto px-4 mt-10">
       <header className="px-4">
-        <h1 className="text-6xl mb-5 font-display text-center" onClick={() => setOracleActive(false)}>Toracle</h1>
+        <h1 className="text-6xl mb-5 font-display text-center cursor-pointer hover:text-gray-400" onClick={() => setOracleActive(false)}>Toracle</h1>
       </header>
       
       {oracleActive ? (

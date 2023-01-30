@@ -105,7 +105,13 @@ const TextUpload = (props) => {
           className="text-2xl inline-block cursor-pointer"
           htmlFor="oracletext"
         >
-          <span className="block bg-white border border-black my-1 text-black p-2">{file ? <>{file.name}</> : <>Clic aquí para seleccionar archivo ...</>}</span>
+          <span className="block bg-white border border-black my-1 text-black p-2">
+            {file ? (
+              <>{file.name}</>
+            ) : (
+              <>Clic aquí para seleccionar archivo ...</>
+            )}
+          </span>
           <input
             type="file"
             id="oracletext"
@@ -122,21 +128,30 @@ const TextUpload = (props) => {
         >
           Subir archivo
         </button>
-        <div className="results p-4 bg-lime-200 text-black text-center mt-3">
-          {uploadResponse && <p className="text-2xl">Archivo de texto subido.</p>}
-        </div>
+
+        {uploadResponse && (
+          <div className="results p-4 bg-lime-200 text-black text-center mt-3">
+            <p className="text-2xl">Archivo de texto subido.</p>
+          </div>
+        )}
+
         <label className="mt-10 block">
           <h1 className="font-display text-2xl">Instrucciones</h1>
           <ol className="pl-5 mt-5">
             <li>1. Pon un título a tu texto</li>
             <li>2. Sube un archivo de texto con la extensión .txt</li>
-            <li>3. El sistema procesará tu texto para poder usarlo como un oráculo.</li>
-            <li>4. Tu texto quedará disponible para que otras personas puedan consultarlo. (nunca se leerá completo, solo se proporcionan fragmentos de tu texto)</li>
+            <li>
+              3. El sistema procesará tu texto para poder usarlo como un
+              oráculo.
+            </li>
+            <li>
+              4. Tu texto quedará disponible para que otras personas puedan
+              consultarlo. (nunca se leerá completo, solo se proporcionan
+              fragmentos de tu texto)
+            </li>
           </ol>
-          
         </label>
       </form>
-     
     </div>
   );
 };
